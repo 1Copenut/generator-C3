@@ -1,0 +1,28 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: $lightgray;
+}
+
+a {
+  color: $blue;
+
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
+    color: $blue;
+  }
+}
+
+#wrapper {
+  @include outer-container;
+  margin: 0 auto;
+
+  header,
+  nav {
+    @include span-columns(6);
+  }
+}
