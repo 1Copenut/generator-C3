@@ -68,6 +68,7 @@ C3Generator.prototype.projectfiles = function projectfiles() {
   this.copy('apple-touch-icon-precomposed.png', 'app/apple-touch-icon-precomposed.png');
   this.copy('apple-touch-icon.png', 'app/apple-touch-icon.png');
   this.copy('favicon.ico', 'app/favicon.ico');
+  this.directory('config', 'config');
 };
 
 // Copy SCSS
@@ -77,8 +78,8 @@ C3Generator.prototype.styles = function styles() {
 
 // Copy Javascript
 C3Generator.prototype.scripts = function scripts() {
-  this.directory('lib', 'app/lib');
-  this.directory('src', 'app/scripts');
+  this.directory('jsLib', 'app/lib');
+  this.directory('jsSrc', 'app/scripts/src');
 };
 
 // Copy nunjucks templates
@@ -103,6 +104,15 @@ C3Generator.prototype.app = function app() {
   this.mkdir('app/templates');
 };
 
+// Make the test directories
+C3Generator.prototype.test = function test() {
+  this.mkdir('test');
+  this.copy('test_index.html', 'test/index.html');
+  this.directory('testScripts', 'test/scripts');
+  this.directory('testFixtures', 'test/fixtures');
+};
+
+// Make the server directory and copy server.js Express file
 C3Generator.prototype.server = function server() {
   this.mkdir('server');
   this.copy('server.js', 'server/server.js');
