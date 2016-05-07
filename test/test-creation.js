@@ -22,8 +22,16 @@ describe('c3 generator', function () {
   it('creates expected files', function (done) {
     var expected = [
       // add files you expect to exist here.
-      '.jshintrc',
-      '.editorconfig'
+      '.babelrc',
+      '.eslintrc',
+      '.editorconfig',
+      '.gitignore',
+      'bower.json',
+      'karma.conf.js',
+      'nodemon.json',
+      'package.json',
+      'phantomas.json',
+      'yslow.js'
     ];
 
     helpers.mockPrompt(this.app, {
