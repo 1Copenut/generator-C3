@@ -39,6 +39,11 @@ C3Generator.prototype.packageJSON = function packageJSON() {
   this.template('_package.json', 'package.json');
 }
 
+// Copy the empty bower.json file
+C3Generator.prototype.bowerJSON = function bowerJSON() {
+  this.template('_bower.json', 'bower.json');
+}
+
 // Copy the Gulpfile
 C3Generator.prototype.gulpfile = function gulpfile() {
   this.template('Gulpfile.js');
@@ -55,43 +60,45 @@ C3Generator.prototype.projectfiles = function projectfiles() {
   this.copy('README.md', 'README.md');
   this.copy('phantomas.json', 'phantomas.json');
   this.copy('yslow.js', 'yslow.js');
+  this.copy('robots.txt', 'app/robots.txt');
+  this.copy('apple-touch-icon-57x57-precomposed.png', 'app/apple-touch-icon-57x57-precomposed.png');
+  this.copy('apple-touch-icon-72x72-precomposed.png', 'app/apple-touch-icon-72x72-precomposed.png');
+  this.copy('apple-touch-icon-114x114-precomposed.png', 'app/apple-touch-icon-114x114-precomposed.png');
+  this.copy('apple-touch-icon-144x144-precomposed.png', 'app/apple-touch-icon-144x144-precomposed.png');
+  this.copy('apple-touch-icon-precomposed.png', 'app/apple-touch-icon-precomposed.png');
+  this.copy('apple-touch-icon.png', 'app/apple-touch-icon.png');
+  this.copy('favicon.ico', 'app/favicon.ico');
 };
 
 // Copy SCSS
 C3Generator.prototype.styles = function styles() {
-  this.copy('main.scss', 'app/styles/sass/main.scss');
-  this.directory('core', 'app/styles/sass');
-  this.directory('bourbon', 'app/styles/sass/lib');
-  this.directory('neat', 'app/styles/sass/lib');
+  this.directory('sass', 'app/styles/sass');
 };
 
 // Copy Javascript
 C3Generator.prototype.scripts = function scripts() {
-  this.copy('main.js', 'app/scripts/src/main.js');
-  this.directory('modernizr', 'app/lib');
-  this.directory('video-js', 'app/lib');
-  this.directory('a11y', 'app/scripts/src');
-  this.directory('lib', 'app/scripts/src');
-  this.directory('utilities', 'app/scripts/src');
+  this.directory('lib', 'app/lib');
+  this.directory('src', 'app/scripts');
 };
 
 // Copy nunjucks templates
 C3Generator.prototype.tmpl = function tmpl() {
-  this.copy('layout.nunjucks', 'app/templates/layout.nunjucks');
-  this.directory('pages', 'app');
-  this.directory('macros', 'app/templates');
-  this.directory('partials', 'app/templates');
+  this.copy('index.nunjucks', 'app/pages/index.nunjucks');
+  this.directory('templates', 'app/templates');
+};
+
+// Copy the Gulp tasks
+C3Generator.prototype.tasks = function tasks() {
+  this.directory('tasks', 'tasks');
 };
 
 // Make the directories
 C3Generator.prototype.app = function app() {
   this.mkdir('app');
+  this.mkdir('app/pages');
   this.mkdir('app/styles');
   this.mkdir('app/styles/css');
-  this.mkdir('app/styles/sass');
-  this.mkdir('app/lib');
   this.mkdir('app/scripts');
-  this.mkdir('app/scripts/src');
   this.mkdir('app/scripts/out');
   this.mkdir('app/templates');
 };

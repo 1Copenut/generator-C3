@@ -1,0 +1,22 @@
+# Directories
+/doc
+/node_modules
+/app/scripts/out/*
+/app/**/*.html
+/app/scripts/out/*
+/dist
+/dist/**/*
+/test/performance/*
+/test/results/*
+/test/scripts/out/*
+/test/screenshots/*
+/coverage/*
+
+# File types
+.DS_Store
+*.swp
+*.log
+*.sass-cache
+*.map
+*.css
+bower.json
