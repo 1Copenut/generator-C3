@@ -1,20 +1,22 @@
 'use strict';
+var htmlWiring = require('html-wiring');
+var mkdirp = require('mkdirp');
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
 
 var C3Generator = module.exports = function C3Generator(args, options, config) {
-  yeoman.generators.Base.apply(this, arguments);
+  yeoman.Base.apply(this, arguments);
 
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] });
   });
 
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+  this.pkg = JSON.parse(htmlWiring.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
-util.inherits(C3Generator, yeoman.generators.Base);
+util.inherits(C3Generator, yeoman.Base);
 
 C3Generator.prototype.askFor = function askFor() {
   var cb = this.async();
@@ -95,18 +97,18 @@ C3Generator.prototype.tasks = function tasks() {
 
 // Make the directories
 C3Generator.prototype.app = function app() {
-  this.mkdir('app');
-  this.mkdir('app/pages');
-  this.mkdir('app/styles');
-  this.mkdir('app/styles/css');
-  this.mkdir('app/scripts');
-  this.mkdir('app/scripts/out');
-  this.mkdir('app/templates');
+  mkdirp('app');
+  mkdirp('app/pages');
+  mkdirp('app/styles');
+  mkdirp('app/styles/css');
+  mkdirp('app/scripts');
+  mkdirp('app/scripts/out');
+  mkdirp('app/templates');
 };
 
 // Make the test directories
 C3Generator.prototype.test = function test() {
-  this.mkdir('test');
+  mkdirp('test');
   this.copy('test_index.html', 'test/index.html');
   this.directory('testScripts', 'test/scripts');
   this.directory('testFixtures', 'test/fixtures');
@@ -114,7 +116,7 @@ C3Generator.prototype.test = function test() {
 
 // Make the server directory and copy server.js Express file
 C3Generator.prototype.server = function server() {
-  this.mkdir('server');
+  mkdirp('server');
   this.copy('server.js', 'server/server.js');
 };
 
