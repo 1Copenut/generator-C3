@@ -16,7 +16,7 @@ describe('general', function () {
       .on('end', done);
   });
 
-  it('the generator can be required without throwing', function() {
+  it('generator can be required without throwing', function() {
     // not testing the actual run of generators yet
     require('../app');
   });
@@ -33,6 +33,13 @@ describe('general', function () {
       'package.json',
       'phantomas.json',
       'yslow.js'
+    ]);
+  });
+
+  it('does not create unexpected files', function() {
+    assert.noFile([
+      'Gruntfile.js',
+      '.bowerrc',
     ]);
   });
 });
