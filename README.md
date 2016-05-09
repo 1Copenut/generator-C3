@@ -1,4 +1,4 @@
-# generator-c3 [![Build Status](https://travis-ci.org/1Copenut/generator-C3.svg?branch=master)](https://travis-ci.org/1copenut/generator-c3)
+# generator-c3 [![Build Status](https://travis-ci.org/1Copenut/generator-C3.svg?branch=master)](https://travis-ci.org/1Copenut/generator-c3)
 
 A generator for [Yeoman](http://yeoman.io).
 
