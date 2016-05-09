@@ -38,8 +38,7 @@ describe('general', function () {
 
   it('does not create unexpected files', function() {
     assert.noFile([
-      'Gruntfile.js',
-      '.bowerrc',
+      'Gruntfile.js'
     ]);
   });
 });

@@ -1,122 +1,104 @@
 'use strict';
-var htmlWiring = require('html-wiring');
-var mkdirp = require('mkdirp');
-var util = require('util');
-var path = require('path');
 var yeoman = require('yeoman-generator');
+var chalk = require('chalk');
+var yosay = require('yosay');
 
+module.exports = yeoman.Base.extend({
+  // Ask for user input
+  prompting: function() {
+    var done = this.async();
 
-var C3Generator = module.exports = function C3Generator(args, options, config) {
-  yeoman.Base.apply(this, arguments);
+    this.prompt({
+      type: 'input',
+      name: 'name',
+      message: 'What would you like to name your project?',
+      default: this.appname
+    }, function(answers) {
+      this.props = answers;
+      this.log(answers.name);
+      done();
+    }.bind(this));
+  },
 
-  this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
-  });
+  writing: {
+    // Copy config files
+    config: function() {
+      this.fs.copyTpl(
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json'), 
+        { name: this.props.name }
+      );
+      
+      this.fs.copyTpl(
+        this.templatePath('_bower.json'),
+        this.destinationPath('bower.json'), 
+        { name: this.props.name }
+      );
+      
+      this.fs.copy(
+        this.templatePath('babelrc'),
+        this.destinationPath('.babelrc')
+      );
 
-  this.pkg = JSON.parse(htmlWiring.readFileAsString(path.join(__dirname, '../package.json')));
-};
+      this.fs.copy(
+        this.templatePath('bowerrc'),
+        this.destinationPath('.bowerrc')
+      );
 
-util.inherits(C3Generator, yeoman.Base);
+      this.fs.copy(
+        this.templatePath('editorconfig'),
+        this.destinationPath('.editorconfig')
+      );
 
-C3Generator.prototype.askFor = function askFor() {
-  var cb = this.async();
+      this.fs.copy(
+        this.templatePath('eslintrc'),
+        this.destinationPath('.eslintrc')
+      );
 
-  // have Yeoman greet the user.
-  console.log(this.yeoman);
+      this.fs.copy(
+        this.templatePath('favicon.ico'),
+        this.destinationPath('favicon.ico')
+      );
 
-  var prompts = [{
-    name: 'staticSite',
-    message: 'What would you like to call your static site?',
-  }];
+      this.fs.copy(
+        this.templatePath('gitignore'),
+        this.destinationPath('.gitignore')
+      );
 
-  this.prompt(prompts, function (props) {
-    this.statSite = props.staticSite;
+      this.fs.copy(
+        this.templatePath('Gulpfile.js'),
+        this.destinationPath('Gulpfile.js')
+      );
 
-    cb();
-  }.bind(this));
-};
+      this.fs.copy(
+        this.templatePath('karma.conf.js'),
+        this.destinationPath('karma.conf.js')
+      );
 
-// Copy the package.json file
-C3Generator.prototype.packageJSON = function packageJSON() {
-  this.template('_package.json', 'package.json');
-}
+      this.fs.copy(
+        this.templatePath('nodemon.json'),
+        this.destinationPath('nodemon.json')
+      );
 
-// Copy the empty bower.json file
-C3Generator.prototype.bowerJSON = function bowerJSON() {
-  this.template('_bower.json', 'bower.json');
-}
+      this.fs.copy(
+        this.templatePath('README.md'),
+        this.destinationPath('README.md')
+      );
 
-// Copy the Gulpfile
-C3Generator.prototype.gulpfile = function gulpfile() {
-  this.template('Gulpfile.js');
-}
+      this.fs.copy(
+        this.templatePath('robots.txt'),
+        this.destinationPath('robots.txt')
+      );
 
-// Copy configuration files
-C3Generator.prototype.projectfiles = function projectfiles() {
-  this.copy('babelrc', '.babelrc');
-  this.copy('editorconfig', '.editorconfig');
-  this.copy('eslintrc', '.eslintrc');
-  this.copy('gitignore', '.gitignore');
-  this.copy('karma.conf.js', 'karma.conf.js');
-  this.copy('nodemon.json', 'nodemon.json');
-  this.copy('README.md', 'README.md');
-  this.copy('phantomas.json', 'phantomas.json');
-  this.copy('yslow.js', 'yslow.js');
-  this.copy('robots.txt', 'app/robots.txt');
-  this.copy('apple-touch-icon-57x57-precomposed.png', 'app/apple-touch-icon-57x57-precomposed.png');
-  this.copy('apple-touch-icon-72x72-precomposed.png', 'app/apple-touch-icon-72x72-precomposed.png');
-  this.copy('apple-touch-icon-114x114-precomposed.png', 'app/apple-touch-icon-114x114-precomposed.png');
-  this.copy('apple-touch-icon-144x144-precomposed.png', 'app/apple-touch-icon-144x144-precomposed.png');
-  this.copy('apple-touch-icon-precomposed.png', 'app/apple-touch-icon-precomposed.png');
-  this.copy('apple-touch-icon.png', 'app/apple-touch-icon.png');
-  this.copy('favicon.ico', 'app/favicon.ico');
-  this.directory('config', 'config');
-};
+      this.fs.copy(
+        this.templatePath('phantomas.json'),
+        this.destinationPath('phantomas.json')
+      );
 
-// Copy SCSS
-C3Generator.prototype.styles = function styles() {
-  this.directory('sass', 'app/styles/sass');
-};
-
-// Copy Javascript
-C3Generator.prototype.scripts = function scripts() {
-  this.directory('jsLib', 'app/lib');
-  this.directory('jsSrc', 'app/scripts/src');
-};
-
-// Copy nunjucks templates
-C3Generator.prototype.tmpl = function tmpl() {
-  this.copy('index.nunjucks', 'app/pages/index.nunjucks');
-  this.directory('templates', 'app/templates');
-};
-
-// Copy the Gulp tasks
-C3Generator.prototype.tasks = function tasks() {
-  this.directory('tasks', 'tasks');
-};
-
-// Make the directories
-C3Generator.prototype.app = function app() {
-  mkdirp('app');
-  mkdirp('app/pages');
-  mkdirp('app/styles');
-  mkdirp('app/styles/css');
-  mkdirp('app/scripts');
-  mkdirp('app/scripts/out');
-  mkdirp('app/templates');
-};
-
-// Make the test directories
-C3Generator.prototype.test = function test() {
-  mkdirp('test');
-  this.copy('test_index.html', 'test/index.html');
-  this.directory('testScripts', 'test/scripts');
-  this.directory('testFixtures', 'test/fixtures');
-};
-
-// Make the server directory and copy server.js Express file
-C3Generator.prototype.server = function server() {
-  mkdirp('server');
-  this.copy('server.js', 'server/server.js');
-};
-
+      this.fs.copy(
+        this.templatePath('yslow.js'),
+        this.destinationPath('yslow.js')
+      );
+    }
+  }
+});

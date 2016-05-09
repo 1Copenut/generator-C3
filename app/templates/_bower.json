@@ -1,19 +1,14 @@
 {
-  "name": "package",
-  "authors": [
-    ""
-  ],
-  "description": "",
-  "main": "",
-  "moduleType": [],
-  "license": "MIT",
-  "homepage": "",
-  "private": true,
+  "name": "<%= name %>",
+  "version": "0.0.0",
+  "dependencies": {
+    "video.js": "5.10.1",
+    "modernizr": "3.3.1"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "test"
   ]
 }
