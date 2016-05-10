@@ -57,7 +57,7 @@ module.exports = yeoman.Base.extend({
 
       this.fs.copy(
         this.templatePath('favicon.ico'),
-        this.destinationPath('favicon.ico')
+        this.destinationPath('app/favicon.ico')
       );
 
       this.fs.copy(
@@ -87,18 +87,84 @@ module.exports = yeoman.Base.extend({
 
       this.fs.copy(
         this.templatePath('robots.txt'),
-        this.destinationPath('robots.txt')
+        this.destinationPath('app/robots.txt')
       );
 
       this.fs.copy(
         this.templatePath('phantomas.json'),
         this.destinationPath('phantomas.json')
       );
-
+      
       this.fs.copy(
         this.templatePath('yslow.js'),
         this.destinationPath('yslow.js')
       );
+      
+      // Copy the config and env files
+      this.directory('config', 'config');
+
+      // Copy the Gulp tasks
+      this.directory('tasks', 'tasks');
+
+      // Copy the /app folder files
+      this.fs.copy(
+        this.templatePath('apple-touch-icon-57x57-precomposed.png'),
+        this.destinationPath('app/apple-touch-icon-57x57-precomposed.png')
+      );
+      
+      this.fs.copy(
+        this.templatePath('apple-touch-icon-72x72-precomposed.png'),
+        this.destinationPath('app/apple-touch-icon-72x72-precomposed.png')
+      );
+      
+      this.fs.copy(
+        this.templatePath('apple-touch-icon-114x114-precomposed.png'),
+        this.destinationPath('app/apple-touch-icon-114x114-precomposed.png')
+      );
+      
+      this.fs.copy(
+        this.templatePath('apple-touch-icon-144x144-precomposed.png'),
+        this.destinationPath('app/apple-touch-icon-144x144-precomposed.png')
+      );
+      
+      this.fs.copy(
+        this.templatePath('apple-touch-icon-precomposed.png'),
+        this.destinationPath('app/apple-touch-icon-precomposed.png')
+      );
+      
+      this.fs.copy(
+        this.templatePath('apple-touch-icon.png'),
+        this.destinationPath('app/apple-touch-icon.png')
+      );
+      
+      // Copy the Sass files and libs
+      this.directory('sass', 'app/styles/sass');
+
+      // Copy the Javascript (not libs)
+      this.directory('jsSrc', 'app/scripts/src');
+      
+      // Copy the Nunjucks template files
+      this.directory('pages', 'app/pages');
+      this.directory('templates', 'app/templates');
+
+      // Copy the test index.html and files
+      this.fs.copy(
+        this.templatePath('test_index.html'),
+        this.destinationPath('test/index.html')
+      );
+
+      this.directory('testScripts', 'test/scripts');
+      this.directory('testFixtures', 'test/fixtures');
+
+      // Copy the server files
+      this.fs.copy(
+        this.templatePath('server.js'),
+        this.destinationPath('server/server.js')
+      );
     }
+  },
+
+  install: function() {
+    this.installDependencies();
   }
 });

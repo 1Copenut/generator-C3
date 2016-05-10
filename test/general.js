@@ -26,6 +26,7 @@ describe('general', function () {
       '.babelrc',
       '.eslintrc',
       '.gitignore',
+      '.bowerrc',
       'bower.json',
       'Gulpfile.js',
       'karma.conf.js',
