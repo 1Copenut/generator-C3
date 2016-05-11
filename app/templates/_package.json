@@ -103,5 +103,6 @@
   "pre-commit": [
     "js-lint",
     "full-test"
-  ]
+  ],
+  "license": "BSD-2-Clause"
 }
