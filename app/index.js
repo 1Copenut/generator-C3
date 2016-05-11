@@ -4,9 +4,13 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = yeoman.Base.extend({
+  
   // Ask for user input
   prompting: function() {
     var done = this.async();
+
+    // Add a nice welcome message with Yosay
+    this.log(yosay('Welcome to C3! I am an opinionated, Gulp-driven toolchain to help you write (and test) your accessible front-end code.'));
 
     this.prompt({
       type: 'input',
