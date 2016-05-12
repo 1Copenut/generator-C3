@@ -26,6 +26,7 @@ describe('general', function () {
       '.babelrc',
       '.eslintrc',
       '.gitignore',
+      '.bowerrc',
       'bower.json',
       'Gulpfile.js',
       'karma.conf.js',
@@ -38,8 +39,7 @@ describe('general', function () {
 
   it('does not create unexpected files', function() {
     assert.noFile([
-      'Gruntfile.js',
-      '.bowerrc',
+      'Gruntfile.js'
     ]);
   });
 });
