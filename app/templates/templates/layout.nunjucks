@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="styles/css/main.css">
   <!-- endbuild -->
 
-  <script src="lib/modernizr/modernizr.js"></script>
+  <script src="libs/modernizr-built/dist/modernizr.min.js"></script>
 </head>
 
 <body>

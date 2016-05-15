@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "video.js": "5.10.1",
-    "modernizr": "3.3.1"
+    "modernizr-built": "3.3.1"
   },
   "ignore": [
     "**/.*",
