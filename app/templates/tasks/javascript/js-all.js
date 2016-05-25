@@ -1,14 +1,14 @@
 /* global module */
 module.exports = function(gulp, sequence) {
-    return function() {
-        'use strict';
+  return function() {
+    'use strict';
 
-        var stream = sequence(
-            'js:lint',
-            'js:build'
-        );
+    var stream = sequence(
+      'js:lint',
+      'js:build'
+    );
 
-        return stream;
-    };
+    return stream;
+  };
 };
 
