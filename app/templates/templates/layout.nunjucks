@@ -31,13 +31,13 @@
     {% block content %}
     {% endblock %}
   </div>
-</div>
-<!-- htmlbuild:remove -->
-<script src="scripts/src/a11y/colortest.js"></script>
-<!-- endbuild -->
 
-<!-- htmlbuild:js -->
-<script src="scripts/out/output.js"></script>
-<!-- endbuild -->
+  <!-- htmlbuild:remove -->
+  <script src="scripts/src/a11y/colortest.js"></script>
+  <!-- endbuild -->
+
+  <!-- htmlbuild:js -->
+  <script src="scripts/out/output.js"></script>
+  <!-- endbuild -->
 </body>
 </html>
